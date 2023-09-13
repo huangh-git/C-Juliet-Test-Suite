@@ -1,4 +1,7 @@
-CC_PATH?=/Users/hh/git/llvm-project-memswasm/build
+import os
+
+def create_makefile(out_file, subdir):
+    content = """CC_PATH?=/Users/hh/git/llvm-project-memswasm/build
 WASI_LIBC_PATH?=/Users/hh/git/ms-wasi-libc/sysroot
 WASI_SDK_PATH?=/Users/hh/git/ms-wasi-sdk/build
 CC=$(CC_PATH)/bin/clang
@@ -27,7 +30,8 @@ C_OBJECTS=$(C_SOURCES:.c=.o)
 # only grab the .cpp files without "w32" or "wchar_t" in the name
 CPP_SOURCES=$(filter-out $(FILTER_OUT),$(wildcard CWE*.cpp))
 
-SIMPLES=$(filter-out $(FILTER_OUT), $(wildcard CWE*0.c*) $(wildcard CWE*1.c*) $(wildcard CWE*2.c*) $(wildcard CWE*3.c*) $(wildcard CWE*4.c*))         $(filter-out $(FILTER_OUT), $(wildcard CWE*5.c*) $(wildcard CWE*6.c*) $(wildcard CWE*7.c*) $(wildcard CWE*8.c*) $(wildcard CWE*9.c*))
+SIMPLES=$(filter-out $(FILTER_OUT), $(wildcard CWE*0.c*) $(wildcard CWE*1.c*) $(wildcard CWE*2.c*) $(wildcard CWE*3.c*) $(wildcard CWE*4.c*)) \
+        $(filter-out $(FILTER_OUT), $(wildcard CWE*5.c*) $(wildcard CWE*6.c*) $(wildcard CWE*7.c*) $(wildcard CWE*8.c*) $(wildcard CWE*9.c*))
 SIMPLES_C=$(filter-out $(CPP_SOURCES), $(SIMPLES))
 
 LETTEREDS=$(filter-out $(FILTER_OUT), $(wildcard CWE*a.c*))
@@ -41,8 +45,10 @@ INDIVIDUALS_C=$(addsuffix .wasm, $(sort $(subst .c,,$(SIMPLES_C) $(LETTEREDS_C))
 OBJECTS=$(MAIN_OBJECT) $(C_OBJECTS) $(C_SUPPORT_OBJECTS)
 
 # TARGET is the only line in this file specific to the CWE
-TARGET=CWE121_s01_good.wasm
-all: $(TARGET)
+TARGET="""
+    content += "CWE121_" + subdir + "_good.wasm\n"
+
+    content += """all: $(TARGET)
 
 individuals: $(INDIVIDUALS_C)
 
@@ -63,3 +69,15 @@ $(MAIN_OBJECT) : $(MAIN)
 
 clean:
 	rm -rf *.o *.out *.wasm $(TARGET)
+"""
+    with open(out_file, 'w') as f:
+        f.write(content)
+
+
+if __name__ == "__main__":
+    for subdir, _, _ in os.walk('.'):
+        if subdir == '.':
+            continue
+        out_file = os.path.join(subdir, "Makefile")  # 替换为你的输入文件名
+        subdir = subdir.lstrip('./')
+        create_makefile(out_file, subdir)

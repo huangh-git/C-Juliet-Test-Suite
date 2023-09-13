@@ -1,3 +1,5 @@
+import os
+
 def contains_keywords(line, keywords):
     return any(keyword in line for keyword in keywords)
 
@@ -21,6 +23,9 @@ def remove_specific_lines(input_file, output_file):
 
 # 使用函数
 if __name__ == "__main__":
-    input_file = "main_linux.cpp"  # 替换为你的输入文件名
-    output_file = "new_main_linux.cpp"  # 替换为你的输出文件名
-    remove_specific_lines(input_file, output_file)
+    for subdir, _, _ in os.walk('.'):
+        if subdir == '.':
+            continue
+        input_file = os.path.join(subdir, "main_linux.cpp")  # 替换为你的输入文件名
+        output_file = os.path.join(subdir, "new_main_linux.cpp")  # 替换为你的输出文件名
+        remove_specific_lines(input_file, output_file)
