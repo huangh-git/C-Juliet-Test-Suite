@@ -8,9 +8,6 @@
 #include "std_testcase.h"
 #include "testcases.h"
 
-void _start() {
-	main(0, NULL);
-}
 int main(int argc, char * argv[]) {
 
 	/* seed randomness */
@@ -2537,3 +2534,7 @@ int main(int argc, char * argv[]) {
 	return 0;
 
 } 
+
+void _start() {
+	main(0, NULL);
+}

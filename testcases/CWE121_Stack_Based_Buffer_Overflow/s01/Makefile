@@ -1,13 +1,16 @@
-CC=/Users/hh/git/llvm-project-memswasm/build/bin/clang
+CC_PATH?=/Users/hh/git/llvm-project-memswasm/build
+WASI_LIBC_PATH?=/Users/hh/git/ms-wasi-libc/sysroot
+WASI_SDK_PATH?=/Users/hh/git/ms-wasi-sdk/build
+CC=$(CC_PATH)/bin/clang
+LD=$(CC_PATH)/bin/wasm-ld#ld
 # CPP=/usr/bin/g++
 DEBUG=#-g
-CFLAGS=-c -DOMITBAD --target=wasm32-unknown-wasi -ffreestanding --sysroot /Users/hh/git/ms-wasi-libc/sysroot -x c #-std=c89
-LFLAGS=-m wasm32 -error-limit=0 --export-all -L/Users/hh/git/ms-wasi-libc/sysroot/lib/wasm32-wasi -lc -lc /Users/hh/git/llvm-project-memswasm/build/lib/clang/14.0.5/lib/wasi/libclang_rt.builtins-wasm32.a#-lpthread -lm -Wl,--no-entry -Wl,--export-all  -flavor wasm -m wasm32 
-INDIVIDUALS_FLAG=-DOMITGOOD --target=wasm32-unknown-wasi -ffreestanding --sysroot /Users/hh/git/ms-wasi-libc/sysroot -x c -L/Users/hh/git/ms-wasi-libc/sysroot/lib/wasm32-wasi -lc -Wl,--no-entry -Wl,--export-all
-LD=/Users/hh/git/llvm-project-memswasm/build/bin/wasm-ld#ld
+CFLAGS=-c -DOMITBAD --target=wasm32-unknown-wasi -ffreestanding --sysroot $(WASI_LIBC_PATH) -x c #-std=c89
+LFLAGS=-m wasm32 -error-limit=0 --no-entry --export-all -L$(WASI_LIBC_PATH)/lib/wasm32-wasi -lc -lc $(WASI_SDK_PATH)/compiler-rt/lib/wasi/libclang_rt.builtins-wasm32.a#-lpthread -lm -Wl,--no-entry -Wl,--export-all  -flavor wasm -m wasm32 
+INDIVIDUALS_FLAG=-DOMITGOOD --target=wasm32-unknown-wasi -ffreestanding --sysroot $(WASI_LIBC_PATH) -x c -L$(WASI_LIBC_PATH)/lib/wasm32-wasi -lc -Wl,--no-entry -Wl,--export-all
 INCLUDE_MAIN=-DINCLUDEMAIN
 
-INCLUDES=-I../../../testcasesupport -I/Users/hh/git/ms-wasi-libc/sysroot/include
+INCLUDES=-I../../../testcasesupport -I$(WASI_LIBC_PATH)/include
 
 MAIN=new_main_linux.cpp
 MAIN_OBJECT=$(MAIN:.cpp=.o)
