@@ -3,7 +3,7 @@ CC=/Users/hh/git/llvm-project-memswasm/build/bin/clang
 DEBUG=#-g
 CFLAGS=-c -DOMITBAD --target=wasm32-unknown-wasi -ffreestanding --sysroot /Users/hh/git/ms-wasi-libc/sysroot -x c #-std=c89
 LFLAGS=-m wasm32 -error-limit=0 --export-all -L/Users/hh/git/ms-wasi-libc/sysroot/lib/wasm32-wasi -lc -lc /Users/hh/git/llvm-project-memswasm/build/lib/clang/14.0.5/lib/wasi/libclang_rt.builtins-wasm32.a#-lpthread -lm -Wl,--no-entry -Wl,--export-all  -flavor wasm -m wasm32 
-INDIVIDUALS_FLAG=-DOMITGOOD --target=wasm32-unknown-wasi -ffreestanding --sysroot /Users/hh/git/ms-wasi-libc/sysroot -x c -L/Users/hh/git/ms-wasi-libc/sysroot/lib/wasm32-wasi -lc /Users/hh/git/llvm-project-memswasm/build/lib/clang/14.0.5/lib/wasi/libclang_rt.builtins-wasm32.a -Wl,--no-entry -Wl,--export-all
+INDIVIDUALS_FLAG=-DOMITGOOD --target=wasm32-unknown-wasi -ffreestanding --sysroot /Users/hh/git/ms-wasi-libc/sysroot -x c -L/Users/hh/git/ms-wasi-libc/sysroot/lib/wasm32-wasi -lc -Wl,--no-entry -Wl,--export-all
 LD=/Users/hh/git/llvm-project-memswasm/build/bin/wasm-ld#ld
 INCLUDE_MAIN=-DINCLUDEMAIN
 
@@ -53,11 +53,11 @@ all: $(TARGET)
 
 individuals: $(INDIVIDUALS_C) #$(INDIVIDUALS_CPP)
 
-$(INDIVIDUALS_C): $(C_SUPPORT_OBJECTS)
-	$(CC) $(INCLUDES) $(INCLUDE_MAIN) -o $@ $(wildcard $(subst .out,,$@)*.c) $(C_SUPPORT_OBJECTS) $(INDIVIDUALS_FLAG)
+$(INDIVIDUALS_C): $(C_SUPPORT_FILES)
+	$(CC) $(INCLUDES) $(INCLUDE_MAIN) -o $@ $(wildcard $(subst .wasm,,$@)*.c) $(C_SUPPORT_FILES) $(INDIVIDUALS_FLAG)
 
-$(INDIVIDUALS_CPP): $(C_SUPPORT_OBJECTS)
-	$(CPP) $(INCLUDES) $(INCLUDE_MAIN) -o $@ $(wildcard $(subst .out,,$@)*.cpp) $(C_SUPPORT_OBJECTS) $(LFLAGS)
+# $(INDIVIDUALS_CPP): $(C_SUPPORT_OBJECTS)
+# 	$(CPP) $(INCLUDES) $(INCLUDE_MAIN) -o $@ $(wildcard $(subst .out,,$@)*.cpp) $(C_SUPPORT_OBJECTS) $(LFLAGS)
 
 $(TARGET) : $(OBJECTS)
 	$(LD) $(LFLAGS) $(OBJECTS) -o $(TARGET)
