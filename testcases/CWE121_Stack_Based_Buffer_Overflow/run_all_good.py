@@ -3,6 +3,9 @@ import subprocess
 import sys
 
 wasmtime_path = '/Users/hh/git/wasmtime/target/debug/wasmtime'
+CC_PATH = '/Users/hh/git/llvm-project-memswasm/build'
+WASI_LIBC_PATH = '/Users/hh/git/ms-wasi-libc/sysroot'
+WASI_SDK_PATH = '/Users/hh/git/ms-wasi-sdk/build'
 if len(sys.argv) - 1 > 0:
     wasmtime_path = sys.argv[1]
 
