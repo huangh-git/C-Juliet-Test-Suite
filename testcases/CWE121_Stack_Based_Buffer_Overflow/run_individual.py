@@ -8,8 +8,11 @@ successful_runs = []
 timeout_runs = []
 failed_runs = []
 wasmtime_path = '/Users/hh/git/wasmtime/target/debug/wasmtime'
+suffix = '.wasm'
 if len(sys.argv) - 1 > 0:
     wasmtime_path = sys.argv[1]
+if len(sys.argv) - 2 > 0:
+    suffix = sys.argv[2]
 
 # Loop through each subdirectory in the current directory
 for subdir, _, _ in os.walk('.'):
@@ -19,19 +22,11 @@ for subdir, _, _ in os.walk('.'):
     # Change to the subdirectory
     os.chdir(subdir)
 
-    # Run 'make individual' command
-    try:
-        subprocess.run(['make', 'individuals'], check=True)
-    except subprocess.CalledProcessError:
-        print(f"Compilation failed in directory: {subdir}")
-        os.chdir('..')  # Change back to the parent directory
-        sys.exit()
-
     # Run each .wasm file in the subdirectory
     for filename in os.listdir('.'):
         if "_good" in filename:
             continue
-        if filename.endswith('.wasm'):
+        if filename.endswith(suffix):
             count = 0
             max_runs = 5
             while count < max_runs:
@@ -39,6 +34,8 @@ for subdir, _, _ in os.walk('.'):
                     result = subprocess.run([wasmtime_path, filename, '--allow-unknown-exports'], check=True, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=10)
                     print(f"++++Successfully ran: {os.path.join(subdir, filename)}")
                     count += 1
+                    if count == max_runs:
+                        successful_runs.append(os.path.join(subdir, filename))
                 except subprocess.TimeoutExpired:
                     print(f"====Timeout while running: {os.path.join(subdir, filename)}")
                     timeout_runs.append(os.path.join(subdir, filename))

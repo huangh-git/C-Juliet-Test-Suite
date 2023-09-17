@@ -4,6 +4,7 @@ def create_makefile(out_file, subdir):
     content = """CC_PATH?=/Users/hh/git/llvm-project-memswasm/build
 WASI_LIBC_PATH?=/Users/hh/git/ms-wasi-libc/sysroot
 WASI_SDK_PATH?=/Users/hh/git/ms-wasi-sdk/build
+SUFFIX ?= .wasm
 CC=$(CC_PATH)/bin/clang
 LD=$(CC_PATH)/bin/wasm-ld#ld
 # CPP=/usr/bin/g++
@@ -40,20 +41,20 @@ LETTEREDS_C=$(subst a.,.,$(filter-out $(CPP_SOURCES), $(LETTEREDS)))
 GOOD1S=$(filter-out $(FILTER_OUT), $(wildcard CWE*_good1.cpp))
 BADS=$(subst _good1.,_bad.,$(GOOD1S))
 
-INDIVIDUALS_C=$(addsuffix .wasm, $(sort $(subst .c,,$(SIMPLES_C) $(LETTEREDS_C))))
+INDIVIDUALS_C=$(addsuffix $(SUFFIX), $(sort $(subst .c,,$(SIMPLES_C) $(LETTEREDS_C))))
 
 OBJECTS=$(MAIN_OBJECT) $(C_OBJECTS) $(C_SUPPORT_OBJECTS)
 
 # TARGET is the only line in this file specific to the CWE
 TARGET="""
-    content += "CWE121_" + subdir + "_good.wasm\n"
+    content += "CWE121_" + subdir + "_good$(SUFFIX)\n"
 
     content += """all: $(TARGET)
 
 individuals: $(INDIVIDUALS_C)
 
 $(INDIVIDUALS_C): $(C_SUPPORT_FILES)
-	$(CC) $(INCLUDES) $(INCLUDE_MAIN) -o $@ $(wildcard $(subst .wasm,,$@)*.c) $(C_SUPPORT_FILES) $(INDIVIDUALS_FLAG)
+	$(CC) $(INCLUDES) $(INCLUDE_MAIN) -o $@ $(wildcard $(subst $(SUFFIX),,$@)*.c) $(C_SUPPORT_FILES) $(INDIVIDUALS_FLAG)
 
 $(TARGET) : $(OBJECTS)
 	$(LD) $(LFLAGS) $(OBJECTS) -o $(TARGET)
@@ -68,7 +69,7 @@ $(MAIN_OBJECT) : $(MAIN)
 	$(CC) $(CFLAGS) $(INCLUDES) $(MAIN) -o $@
 
 clean:
-	rm -rf *.o *.out *.wasm $(TARGET)
+	rm -rf *.o *.out *$(SUFFIX) $(TARGET)
 """
     with open(out_file, 'w') as f:
         f.write(content)

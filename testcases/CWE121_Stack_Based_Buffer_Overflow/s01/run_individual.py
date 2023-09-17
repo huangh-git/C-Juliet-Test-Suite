@@ -29,6 +29,8 @@ def run_wasm_file(file_path):
 
 def main():
     for filename in os.listdir('.'):
+        if "good" in filename:
+            continue
         if filename.endswith('.wasm'):
             run_wasm_file(filename)
     print("\n\nSuccessfully ran the following files without 'rand' in their names:")

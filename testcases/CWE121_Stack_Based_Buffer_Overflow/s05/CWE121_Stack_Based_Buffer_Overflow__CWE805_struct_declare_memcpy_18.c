@@ -91,7 +91,7 @@ void CWE121_Stack_Based_Buffer_Overflow__CWE805_struct_declare_memcpy_18_good()
 
 #ifdef INCLUDEMAIN
 
-int main(int argc, char * argv[])
+int main()
 {
     /* seed randomness */
     srand( (unsigned)time(NULL) );

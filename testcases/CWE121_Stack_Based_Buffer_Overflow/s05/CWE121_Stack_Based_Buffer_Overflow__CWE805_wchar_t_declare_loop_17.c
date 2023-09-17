@@ -95,7 +95,7 @@ void CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_declare_loop_17_good()
 
 #ifdef INCLUDEMAIN
 
-int main(int argc, char * argv[])
+int main()
 {
     /* seed randomness */
     srand( (unsigned)time(NULL) );
