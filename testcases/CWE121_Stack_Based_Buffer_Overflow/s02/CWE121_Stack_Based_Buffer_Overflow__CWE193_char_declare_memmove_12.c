@@ -30,7 +30,7 @@ void CWE121_Stack_Based_Buffer_Overflow__CWE193_char_declare_memmove_12_bad()
     char * data;
     char dataBadBuffer[10];
     char dataGoodBuffer[10+1];
-    if(globalReturnsTrueOrFalse())
+    if(globalReturnsTrueOrFalse() || true)
     {
         /* FLAW: Set a pointer to a buffer that does not leave room for a NULL terminator when performing
          * string copies in the sinks  */

@@ -27,13 +27,16 @@ for subdir, _, _ in os.walk('.'):
         if "_good" in filename:
             continue
         if filename.endswith(suffix):
-            count = 0
             max_runs = 5
-            while count < max_runs:
+            count = max_runs
+            if "rand" in filename:
+                count += max_runs
+                
+            while count > 0:
                 try:
                     result = subprocess.run([wasmtime_path, filename, '--allow-unknown-exports'], check=True, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=10)
                     print(f"++++Successfully ran: {os.path.join(subdir, filename)}")
-                    count += 1
+                    count -= 1
                     if count == max_runs:
                         successful_runs.append(os.path.join(subdir, filename))
                 except subprocess.TimeoutExpired:
@@ -43,6 +46,7 @@ for subdir, _, _ in os.walk('.'):
                 except subprocess.CalledProcessError as e:
                     print(f"----Failed to run: {os.path.join(subdir, filename)}")
                     if 'out of bounds' not in str(e.stderr):
+                        print("without 'out of bounds'")
                         failed_runs.append(os.path.join(subdir, filename))
                     break
 

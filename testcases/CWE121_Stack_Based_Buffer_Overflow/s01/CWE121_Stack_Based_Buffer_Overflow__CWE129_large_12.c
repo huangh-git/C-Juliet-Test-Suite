@@ -24,7 +24,7 @@ void CWE121_Stack_Based_Buffer_Overflow__CWE129_large_12_bad()
     int data;
     /* Initialize data */
     data = -1;
-    if(globalReturnsTrueOrFalse())
+    if(globalReturnsTrueOrFalse() || true)
     {
         /* POTENTIAL FLAW: Use an invalid index */
         data = 10;

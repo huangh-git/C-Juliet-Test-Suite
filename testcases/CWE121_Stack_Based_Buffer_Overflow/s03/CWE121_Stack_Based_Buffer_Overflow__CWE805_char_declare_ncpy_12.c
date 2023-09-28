@@ -25,7 +25,7 @@ void CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_ncpy_12_bad()
     char * data;
     char dataBadBuffer[50];
     char dataGoodBuffer[100];
-    if(globalReturnsTrueOrFalse())
+    if(globalReturnsTrueOrFalse() || true)
     {
         /* FLAW: Set a pointer to a "small" buffer. This buffer will be used in the sinks as a destination
          * buffer in various memory copying functions using a "large" source buffer. */

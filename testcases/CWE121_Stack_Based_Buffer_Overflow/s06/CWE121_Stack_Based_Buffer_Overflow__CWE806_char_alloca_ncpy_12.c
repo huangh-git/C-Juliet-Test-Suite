@@ -25,7 +25,7 @@ void CWE121_Stack_Based_Buffer_Overflow__CWE806_char_alloca_ncpy_12_bad()
     char * data;
     char * dataBuffer = (char *)ALLOCA(100*sizeof(char));
     data = dataBuffer;
-    if(globalReturnsTrueOrFalse())
+    if(globalReturnsTrueOrFalse() || true)
     {
         /* FLAW: Initialize data as a large buffer that is larger than the small buffer used in the sink */
         memset(data, 'A', 100-1); /* fill with 'A's */
