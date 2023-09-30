@@ -22,7 +22,7 @@ Template File: sources-sinks-42.tmpl.c
 static int badSource(int data)
 {
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32();
+    data = RAND32()%20;
     return data;
 }
 
@@ -111,7 +111,7 @@ static void goodG2B()
 static int goodB2GSource(int data)
 {
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32();
+    data = RAND32()%20;
     return data;
 }
 
@@ -163,7 +163,7 @@ void CWE122_Heap_Based_Buffer_Overflow__c_CWE129_rand_42_good()
 
 #ifdef INCLUDEMAIN
 
-int main(int argc, char * argv[])
+int main()
 {
     /* seed randomness */
     srand( (unsigned)time(NULL) );

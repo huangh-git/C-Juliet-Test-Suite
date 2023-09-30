@@ -113,7 +113,7 @@ void CWE122_Heap_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_09_good()
 
 #ifdef INCLUDEMAIN
 
-int main(int argc, char * argv[])
+int main()
 {
     /* seed randomness */
     srand( (unsigned)time(NULL) );

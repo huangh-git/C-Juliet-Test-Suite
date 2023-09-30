@@ -25,7 +25,7 @@ void CWE122_Heap_Based_Buffer_Overflow__c_CWE129_rand_31_bad()
     /* Initialize data */
     data = -1;
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32();
+    data = RAND32()%20;
     {
         int dataCopy = data;
         int data = dataCopy;
@@ -110,7 +110,7 @@ static void goodB2G()
     /* Initialize data */
     data = -1;
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32();
+    data = RAND32()%20;
     {
         int dataCopy = data;
         int data = dataCopy;
@@ -156,7 +156,7 @@ void CWE122_Heap_Based_Buffer_Overflow__c_CWE129_rand_31_good()
    application, which is how source code analysis tools are tested. */
 #ifdef INCLUDEMAIN
 
-int main(int argc, char * argv[])
+int main()
 {
     /* seed randomness */
     srand( (unsigned)time(NULL) );

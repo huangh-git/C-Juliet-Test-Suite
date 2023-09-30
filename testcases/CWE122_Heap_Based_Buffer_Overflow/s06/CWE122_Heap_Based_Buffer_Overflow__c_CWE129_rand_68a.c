@@ -32,7 +32,7 @@ void CWE122_Heap_Based_Buffer_Overflow__c_CWE129_rand_68_bad()
     /* Initialize data */
     data = -1;
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32();
+    data = RAND32()%20;
     CWE122_Heap_Based_Buffer_Overflow__c_CWE129_rand_68_badData = data;
     CWE122_Heap_Based_Buffer_Overflow__c_CWE129_rand_68b_badSink();
 }
@@ -65,7 +65,7 @@ static void goodB2G()
     /* Initialize data */
     data = -1;
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32();
+    data = RAND32()%20;
     CWE122_Heap_Based_Buffer_Overflow__c_CWE129_rand_68_goodB2GData = data;
     CWE122_Heap_Based_Buffer_Overflow__c_CWE129_rand_68b_goodB2GSink();
 }
@@ -85,7 +85,7 @@ void CWE122_Heap_Based_Buffer_Overflow__c_CWE129_rand_68_good()
 
 #ifdef INCLUDEMAIN
 
-int main(int argc, char * argv[])
+int main()
 {
     /* seed randomness */
     srand( (unsigned)time(NULL) );

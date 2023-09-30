@@ -27,7 +27,7 @@ void CWE122_Heap_Based_Buffer_Overflow__c_CWE129_rand_11_bad()
     if(globalReturnsTrue())
     {
         /* POTENTIAL FLAW: Set data to a random value */
-        data = RAND32();
+        data = RAND32()%20;
     }
     if(globalReturnsTrue())
     {
@@ -73,7 +73,7 @@ static void goodB2G1()
     if(globalReturnsTrue())
     {
         /* POTENTIAL FLAW: Set data to a random value */
-        data = RAND32();
+        data = RAND32()%20;
     }
     if(globalReturnsFalse())
     {
@@ -119,7 +119,7 @@ static void goodB2G2()
     if(globalReturnsTrue())
     {
         /* POTENTIAL FLAW: Set data to a random value */
-        data = RAND32();
+        data = RAND32()%20;
     }
     if(globalReturnsTrue())
     {
@@ -259,7 +259,7 @@ void CWE122_Heap_Based_Buffer_Overflow__c_CWE129_rand_11_good()
 
 #ifdef INCLUDEMAIN
 
-int main(int argc, char * argv[])
+int main()
 {
     /* seed randomness */
     srand( (unsigned)time(NULL) );
