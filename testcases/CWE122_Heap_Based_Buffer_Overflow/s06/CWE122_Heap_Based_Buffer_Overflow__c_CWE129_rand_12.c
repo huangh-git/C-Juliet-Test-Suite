@@ -27,7 +27,7 @@ void CWE122_Heap_Based_Buffer_Overflow__c_CWE129_rand_12_bad()
     if(globalReturnsTrueOrFalse())
     {
         /* POTENTIAL FLAW: Set data to a random value */
-        data = RAND32()%20;
+        data = 10;
     }
     else
     {
@@ -109,12 +109,12 @@ static void goodB2G()
     if(globalReturnsTrueOrFalse())
     {
         /* POTENTIAL FLAW: Set data to a random value */
-        data = RAND32()%20;
+        data = 10;
     }
     else
     {
         /* POTENTIAL FLAW: Set data to a random value */
-        data = RAND32()%20;
+        data = 10;
     }
     if(globalReturnsTrueOrFalse())
     {

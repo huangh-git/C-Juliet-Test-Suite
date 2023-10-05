@@ -32,7 +32,7 @@ void CWE121_Stack_Based_Buffer_Overflow__CWE129_rand_34_bad()
     /* Initialize data */
     data = -1;
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32();
+    data = 10;
     myUnion.unionFirst = data;
     {
         int data = myUnion.unionSecond;
@@ -105,7 +105,7 @@ static void goodB2G()
     /* Initialize data */
     data = -1;
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32();
+    data = 10;
     myUnion.unionFirst = data;
     {
         int data = myUnion.unionSecond;

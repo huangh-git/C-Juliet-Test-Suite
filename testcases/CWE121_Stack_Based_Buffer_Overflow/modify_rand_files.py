@@ -6,7 +6,8 @@ def process_file(file_path):
         file_data = file.read()
 
     # 使用正则表达式替换特定文本
-    new_data = re.sub(r'data\s*=\s*RAND32\(\);', 'data = RAND32()%20;', file_data)
+    pattern = r"data\s*=\s*RAND32\(\)\s*;|data\s*=\s*RAND32\(\)\s*%\s*20\s*;"
+    new_data = re.sub(pattern, 'data = 10;', file_data)
 
     # 如果文件内容发生变化，则写回文件
     if new_data != file_data:

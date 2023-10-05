@@ -27,7 +27,7 @@ void CWE122_Heap_Based_Buffer_Overflow__c_CWE129_rand_13_bad()
     if(GLOBAL_CONST_FIVE==5)
     {
         /* POTENTIAL FLAW: Set data to a random value */
-        data = RAND32()%20;
+        data = 10;
     }
     if(GLOBAL_CONST_FIVE==5)
     {
@@ -73,7 +73,7 @@ static void goodB2G1()
     if(GLOBAL_CONST_FIVE==5)
     {
         /* POTENTIAL FLAW: Set data to a random value */
-        data = RAND32()%20;
+        data = 10;
     }
     if(GLOBAL_CONST_FIVE!=5)
     {
@@ -119,7 +119,7 @@ static void goodB2G2()
     if(GLOBAL_CONST_FIVE==5)
     {
         /* POTENTIAL FLAW: Set data to a random value */
-        data = RAND32()%20;
+        data = 10;
     }
     if(GLOBAL_CONST_FIVE==5)
     {

@@ -25,7 +25,7 @@ void CWE121_Stack_Based_Buffer_Overflow__CWE129_rand_01_bad()
     /* Initialize data */
     data = -1;
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32();
+    data = 10;
     {
         int i;
         int buffer[10] = { 0 };
@@ -88,7 +88,7 @@ static void goodB2G()
     /* Initialize data */
     data = -1;
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32();
+    data = 10;
     {
         int i;
         int buffer[10] = { 0 };

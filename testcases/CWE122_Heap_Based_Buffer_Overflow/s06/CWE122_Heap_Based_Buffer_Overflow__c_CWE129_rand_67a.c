@@ -34,7 +34,7 @@ void CWE122_Heap_Based_Buffer_Overflow__c_CWE129_rand_67_bad()
     /* Initialize data */
     data = -1;
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32()%20;
+    data = 10;
     myStruct.structFirst = data;
     CWE122_Heap_Based_Buffer_Overflow__c_CWE129_rand_67b_badSink(myStruct);
 }
@@ -69,7 +69,7 @@ static void goodB2G()
     /* Initialize data */
     data = -1;
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32()%20;
+    data = 10;
     myStruct.structFirst = data;
     CWE122_Heap_Based_Buffer_Overflow__c_CWE129_rand_67b_goodB2GSink(myStruct);
 }

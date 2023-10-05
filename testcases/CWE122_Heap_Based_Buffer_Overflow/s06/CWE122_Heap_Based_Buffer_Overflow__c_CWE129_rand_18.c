@@ -27,7 +27,7 @@ void CWE122_Heap_Based_Buffer_Overflow__c_CWE129_rand_18_bad()
     goto source;
 source:
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32()%20;
+    data = 10;
     goto sink;
 sink:
     {
@@ -71,7 +71,7 @@ static void goodB2G()
     goto source;
 source:
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32()%20;
+    data = 10;
     goto sink;
 sink:
     {

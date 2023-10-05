@@ -157,7 +157,7 @@ int globalReturnsFalse()
 
 int globalReturnsTrueOrFalse() 
 {
-    return (rand() % 2);
+    return (rand() % 2) || true;
 }
 
 /* The variables below are declared "const", so a tool should

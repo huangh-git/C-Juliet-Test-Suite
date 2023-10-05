@@ -22,7 +22,7 @@ Template File: sources-sinks-61b.tmpl.c
 int CWE121_Stack_Based_Buffer_Overflow__CWE129_rand_61b_badSource(int data)
 {
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32();
+    data = 10;
     return data;
 }
 
@@ -43,7 +43,7 @@ int CWE121_Stack_Based_Buffer_Overflow__CWE129_rand_61b_goodG2BSource(int data)
 int CWE121_Stack_Based_Buffer_Overflow__CWE129_rand_61b_goodB2GSource(int data)
 {
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32();
+    data = 10;
     return data;
 }
 

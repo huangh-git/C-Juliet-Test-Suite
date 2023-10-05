@@ -28,7 +28,7 @@ void CWE122_Heap_Based_Buffer_Overflow__c_CWE129_rand_17_bad()
     for(i = 0; i < 1; i++)
     {
         /* POTENTIAL FLAW: Set data to a random value */
-        data = RAND32()%20;
+        data = 10;
     }
     for(j = 0; j < 1; j++)
     {
@@ -75,7 +75,7 @@ static void goodB2G()
     for(i = 0; i < 1; i++)
     {
         /* POTENTIAL FLAW: Set data to a random value */
-        data = RAND32()%20;
+        data = 10;
     }
     for(k = 0; k < 1; k++)
     {

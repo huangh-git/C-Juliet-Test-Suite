@@ -25,7 +25,7 @@ void CWE122_Heap_Based_Buffer_Overflow__c_CWE129_rand_01_bad()
     /* Initialize data */
     data = -1;
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32()%20;
+    data = 10;
     {
         int i;
         int * buffer = (int *)malloc(10 * sizeof(int));
@@ -102,7 +102,7 @@ static void goodB2G()
     /* Initialize data */
     data = -1;
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32()%20;
+    data = 10;
     {
         int i;
         int * buffer = (int *)malloc(10 * sizeof(int));

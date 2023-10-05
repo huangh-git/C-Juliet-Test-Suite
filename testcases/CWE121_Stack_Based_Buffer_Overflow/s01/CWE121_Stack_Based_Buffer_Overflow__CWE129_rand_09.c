@@ -27,7 +27,7 @@ void CWE121_Stack_Based_Buffer_Overflow__CWE129_rand_09_bad()
     if(GLOBAL_CONST_TRUE)
     {
         /* POTENTIAL FLAW: Set data to a random value */
-        data = RAND32();
+        data = 10;
     }
     if(GLOBAL_CONST_TRUE)
     {
@@ -66,7 +66,7 @@ static void goodB2G1()
     if(GLOBAL_CONST_TRUE)
     {
         /* POTENTIAL FLAW: Set data to a random value */
-        data = RAND32();
+        data = 10;
     }
     if(GLOBAL_CONST_FALSE)
     {
@@ -105,7 +105,7 @@ static void goodB2G2()
     if(GLOBAL_CONST_TRUE)
     {
         /* POTENTIAL FLAW: Set data to a random value */
-        data = RAND32();
+        data = 10;
     }
     if(GLOBAL_CONST_TRUE)
     {

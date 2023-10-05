@@ -28,7 +28,7 @@ void CWE121_Stack_Based_Buffer_Overflow__CWE129_rand_54_bad()
     /* Initialize data */
     data = -1;
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32();
+    data = 10;
     CWE121_Stack_Based_Buffer_Overflow__CWE129_rand_54b_badSink(data);
 }
 
@@ -59,7 +59,7 @@ static void goodB2G()
     /* Initialize data */
     data = -1;
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32();
+    data = 10;
     CWE121_Stack_Based_Buffer_Overflow__CWE129_rand_54b_goodB2GSink(data);
 }
 

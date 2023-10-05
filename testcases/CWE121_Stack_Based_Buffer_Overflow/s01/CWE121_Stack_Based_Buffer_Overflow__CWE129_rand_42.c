@@ -22,7 +22,7 @@ Template File: sources-sinks-42.tmpl.c
 static int badSource(int data)
 {
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32();
+    data = 10;
     return data;
 }
 
@@ -97,7 +97,7 @@ static void goodG2B()
 static int goodB2GSource(int data)
 {
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32();
+    data = 10;
     return data;
 }
 
