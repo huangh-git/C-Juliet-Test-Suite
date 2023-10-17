@@ -272,7 +272,7 @@ void CWE124_Buffer_Underwrite__CWE839_fgets_08_good()
 
 #ifdef INCLUDEMAIN
 
-int main(int argc, char * argv[])
+int main()
 {
     /* seed randomness */
     srand( (unsigned)time(NULL) );

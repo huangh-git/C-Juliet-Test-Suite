@@ -28,7 +28,7 @@ void CWE124_Buffer_Underwrite__CWE839_rand_15_bad()
     {
     case 6:
         /* POTENTIAL FLAW: Set data to a random value */
-        data = RAND32();
+        data = -1;
         break;
     default:
         /* INCIDENTAL: CWE 561 Dead Code, the code below will never run */
@@ -79,7 +79,7 @@ static void goodB2G1()
     {
     case 6:
         /* POTENTIAL FLAW: Set data to a random value */
-        data = RAND32();
+        data = -1;
         break;
     default:
         /* INCIDENTAL: CWE 561 Dead Code, the code below will never run */
@@ -125,7 +125,7 @@ static void goodB2G2()
     {
     case 6:
         /* POTENTIAL FLAW: Set data to a random value */
-        data = RAND32();
+        data = -1;
         break;
     default:
         /* INCIDENTAL: CWE 561 Dead Code, the code below will never run */
@@ -274,7 +274,7 @@ void CWE124_Buffer_Underwrite__CWE839_rand_15_good()
 
 #ifdef INCLUDEMAIN
 
-int main(int argc, char * argv[])
+int main()
 {
     /* seed randomness */
     srand( (unsigned)time(NULL) );

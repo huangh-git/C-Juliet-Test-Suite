@@ -53,7 +53,7 @@ void CWE124_Buffer_Underwrite__CWE839_rand_45_bad()
     /* Initialize data */
     data = -1;
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32();
+    data = -1;
     CWE124_Buffer_Underwrite__CWE839_rand_45_badData = data;
     badSink();
 }
@@ -129,7 +129,7 @@ static void goodB2G()
     /* Initialize data */
     data = -1;
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32();
+    data = -1;
     CWE124_Buffer_Underwrite__CWE839_rand_45_goodB2GData = data;
     goodB2GSink();
 }
@@ -148,7 +148,7 @@ void CWE124_Buffer_Underwrite__CWE839_rand_45_good()
    application, which is how source code analysis tools are tested. */
 #ifdef INCLUDEMAIN
 
-int main(int argc, char * argv[])
+int main()
 {
     /* seed randomness */
     srand( (unsigned)time(NULL) );

@@ -37,7 +37,7 @@ for subdir, _, _ in os.walk('.'):
                     result = subprocess.run([wasmtime_path, filename, '--allow-unknown-exports'], check=True, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=10)
                     print(f"++++Successfully ran: {os.path.join(subdir, filename)}")
                     count -= 1
-                    if count == max_runs:
+                    if count == 0:
                         successful_runs.append(os.path.join(subdir, filename))
                 except subprocess.TimeoutExpired:
                     print(f"====Timeout while running: {os.path.join(subdir, filename)}")

@@ -22,6 +22,8 @@ for subdir, _, _ in os.walk('.'):
     
     # 执行 'wasmtime dirname.wasm' 命令
     wasm_file = f"CWE122_{os.path.basename(subdir)}_good{suffix}"
+    if not os.path.exists(wasm_file):
+        continue
     try:
         subprocess.run([wasmtime_path, wasm_file, '--allow-unknown-exports'], check=True)
     except subprocess.CalledProcessError:

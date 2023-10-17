@@ -28,7 +28,7 @@ void CWE124_Buffer_Underwrite__CWE839_rand_53_bad()
     /* Initialize data */
     data = -1;
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32();
+    data = -1;
     CWE124_Buffer_Underwrite__CWE839_rand_53b_badSink(data);
 }
 
@@ -59,7 +59,7 @@ static void goodB2G()
     /* Initialize data */
     data = -1;
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32();
+    data = -1;
     CWE124_Buffer_Underwrite__CWE839_rand_53b_goodB2GSink(data);
 }
 
@@ -78,7 +78,7 @@ void CWE124_Buffer_Underwrite__CWE839_rand_53_good()
 
 #ifdef INCLUDEMAIN
 
-int main(int argc, char * argv[])
+int main()
 {
     /* seed randomness */
     srand( (unsigned)time(NULL) );

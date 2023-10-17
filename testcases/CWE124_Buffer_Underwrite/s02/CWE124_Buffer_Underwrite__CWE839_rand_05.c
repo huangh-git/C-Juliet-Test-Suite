@@ -33,7 +33,7 @@ void CWE124_Buffer_Underwrite__CWE839_rand_05_bad()
     if(staticTrue)
     {
         /* POTENTIAL FLAW: Set data to a random value */
-        data = RAND32();
+        data = -1;
     }
     if(staticTrue)
     {
@@ -72,7 +72,7 @@ static void goodB2G1()
     if(staticTrue)
     {
         /* POTENTIAL FLAW: Set data to a random value */
-        data = RAND32();
+        data = -1;
     }
     if(staticFalse)
     {
@@ -111,7 +111,7 @@ static void goodB2G2()
     if(staticTrue)
     {
         /* POTENTIAL FLAW: Set data to a random value */
-        data = RAND32();
+        data = -1;
     }
     if(staticTrue)
     {
@@ -230,7 +230,7 @@ void CWE124_Buffer_Underwrite__CWE839_rand_05_good()
 
 #ifdef INCLUDEMAIN
 
-int main(int argc, char * argv[])
+int main()
 {
     /* seed randomness */
     srand( (unsigned)time(NULL) );

@@ -265,7 +265,7 @@ void CWE124_Buffer_Underwrite__CWE839_connect_socket_31_good()
    application, which is how source code analysis tools are tested. */
 #ifdef INCLUDEMAIN
 
-int main(int argc, char * argv[])
+int main()
 {
     /* seed randomness */
     srand( (unsigned)time(NULL) );
