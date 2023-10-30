@@ -29,7 +29,7 @@ void CWE126_Buffer_Overread__CWE129_rand_32_bad()
     {
         int data = *dataPtr1;
         /* POTENTIAL FLAW: Set data to a random value */
-        data = RAND32();
+        data = 10;
         *dataPtr1 = data;
     }
     {
@@ -98,7 +98,7 @@ static void goodB2G()
     {
         int data = *dataPtr1;
         /* POTENTIAL FLAW: Set data to a random value */
-        data = RAND32();
+        data = 10;
         *dataPtr1 = data;
     }
     {

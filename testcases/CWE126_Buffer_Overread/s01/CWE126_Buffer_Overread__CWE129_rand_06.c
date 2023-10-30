@@ -32,7 +32,7 @@ void CWE126_Buffer_Overread__CWE129_rand_06_bad()
     if(STATIC_CONST_FIVE==5)
     {
         /* POTENTIAL FLAW: Set data to a random value */
-        data = RAND32();
+        data = 10;
     }
     if(STATIC_CONST_FIVE==5)
     {
@@ -65,7 +65,7 @@ static void goodB2G1()
     if(STATIC_CONST_FIVE==5)
     {
         /* POTENTIAL FLAW: Set data to a random value */
-        data = RAND32();
+        data = 10;
     }
     if(STATIC_CONST_FIVE!=5)
     {
@@ -98,7 +98,7 @@ static void goodB2G2()
     if(STATIC_CONST_FIVE==5)
     {
         /* POTENTIAL FLAW: Set data to a random value */
-        data = RAND32();
+        data = 10;
     }
     if(STATIC_CONST_FIVE==5)
     {

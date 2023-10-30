@@ -25,7 +25,7 @@ void CWE126_Buffer_Overread__CWE129_rand_01_bad()
     /* Initialize data */
     data = -1;
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32();
+    data = 10;
     {
         int buffer[10] = { 0 };
         /* POTENTIAL FLAW: Attempt to access an index of the array that is above the upper bound
@@ -76,7 +76,7 @@ static void goodB2G()
     /* Initialize data */
     data = -1;
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32();
+    data = 10;
     {
         int buffer[10] = { 0 };
         /* FIX: Properly validate the array index and prevent a buffer overread */

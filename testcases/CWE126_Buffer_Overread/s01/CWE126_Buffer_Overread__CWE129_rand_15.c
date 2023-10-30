@@ -28,7 +28,7 @@ void CWE126_Buffer_Overread__CWE129_rand_15_bad()
     {
     case 6:
         /* POTENTIAL FLAW: Set data to a random value */
-        data = RAND32();
+        data = 10;
         break;
     default:
         /* INCIDENTAL: CWE 561 Dead Code, the code below will never run */
@@ -73,7 +73,7 @@ static void goodB2G1()
     {
     case 6:
         /* POTENTIAL FLAW: Set data to a random value */
-        data = RAND32();
+        data = 10;
         break;
     default:
         /* INCIDENTAL: CWE 561 Dead Code, the code below will never run */
@@ -113,7 +113,7 @@ static void goodB2G2()
     {
     case 6:
         /* POTENTIAL FLAW: Set data to a random value */
-        data = RAND32();
+        data = 10;
         break;
     default:
         /* INCIDENTAL: CWE 561 Dead Code, the code below will never run */

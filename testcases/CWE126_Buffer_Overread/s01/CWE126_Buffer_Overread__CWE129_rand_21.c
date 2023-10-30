@@ -48,7 +48,7 @@ void CWE126_Buffer_Overread__CWE129_rand_21_bad()
     /* Initialize data */
     data = -1;
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32();
+    data = 10;
     badStatic = 1; /* true */
     badSink(data);
 }
@@ -93,7 +93,7 @@ static void goodB2G1()
     /* Initialize data */
     data = -1;
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32();
+    data = 10;
     goodB2G1Static = 0; /* false */
     goodB2G1Sink(data);
 }
@@ -124,7 +124,7 @@ static void goodB2G2()
     /* Initialize data */
     data = -1;
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32();
+    data = 10;
     goodB2G2Static = 1; /* true */
     goodB2G2Sink(data);
 }

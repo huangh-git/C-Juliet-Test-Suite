@@ -27,7 +27,7 @@ void CWE126_Buffer_Overread__CWE129_rand_11_bad()
     if(globalReturnsTrue())
     {
         /* POTENTIAL FLAW: Set data to a random value */
-        data = RAND32();
+        data = 10;
     }
     if(globalReturnsTrue())
     {
@@ -60,7 +60,7 @@ static void goodB2G1()
     if(globalReturnsTrue())
     {
         /* POTENTIAL FLAW: Set data to a random value */
-        data = RAND32();
+        data = 10;
     }
     if(globalReturnsFalse())
     {
@@ -93,7 +93,7 @@ static void goodB2G2()
     if(globalReturnsTrue())
     {
         /* POTENTIAL FLAW: Set data to a random value */
-        data = RAND32();
+        data = 10;
     }
     if(globalReturnsTrue())
     {

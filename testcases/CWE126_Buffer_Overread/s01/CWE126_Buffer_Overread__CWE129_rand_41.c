@@ -42,7 +42,7 @@ void CWE126_Buffer_Overread__CWE129_rand_41_bad()
     /* Initialize data */
     data = -1;
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32();
+    data = 10;
     badSink(data);
 }
 
@@ -102,7 +102,7 @@ static void goodB2G()
     /* Initialize data */
     data = -1;
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32();
+    data = 10;
     goodB2GSink(data);
 }
 

@@ -27,7 +27,7 @@ void CWE126_Buffer_Overread__CWE129_rand_18_bad()
     goto source;
 source:
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32();
+    data = 10;
     goto sink;
 sink:
     {
@@ -58,7 +58,7 @@ static void goodB2G()
     goto source;
 source:
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32();
+    data = 10;
     goto sink;
 sink:
     {
