@@ -130,7 +130,7 @@ void CWE126_Buffer_Overread__CWE129_large_45_good()
    application, which is how source code analysis tools are tested. */
 #ifdef INCLUDEMAIN
 
-int main(int argc, char * argv[])
+int main()
 {
     /* seed randomness */
     srand( (unsigned)time(NULL) );

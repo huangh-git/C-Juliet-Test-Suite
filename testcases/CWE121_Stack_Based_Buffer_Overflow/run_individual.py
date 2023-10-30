@@ -24,9 +24,7 @@ for subdir, _, _ in os.walk('.'):
 
     # Run each .wasm file in the subdirectory
     for filename in os.listdir('.'):
-        if "_good" in filename:
-            continue
-        if filename.endswith(suffix):
+        if filename.endswith(suffix) and "_good" not in filename:
             max_runs = 5
             count = max_runs
             if "rand" in filename:

@@ -74,7 +74,7 @@ void CWE126_Buffer_Overread__char_declare_memcpy_54_good()
 
 #ifdef INCLUDEMAIN
 
-int main(int argc, char * argv[])
+int main()
 {
     /* seed randomness */
     srand( (unsigned)time(NULL) );

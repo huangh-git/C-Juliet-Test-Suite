@@ -137,7 +137,7 @@ void CWE126_Buffer_Overread__malloc_char_loop_03_good()
 
 #ifdef INCLUDEMAIN
 
-int main(int argc, char * argv[])
+int main()
 {
     /* seed randomness */
     srand( (unsigned)time(NULL) );
