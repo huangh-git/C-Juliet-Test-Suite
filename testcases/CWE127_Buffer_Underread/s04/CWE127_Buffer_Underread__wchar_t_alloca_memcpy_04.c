@@ -123,7 +123,7 @@ void CWE127_Buffer_Underread__wchar_t_alloca_memcpy_04_good()
 
 #ifdef INCLUDEMAIN
 
-int main(int argc, char * argv[])
+int main()
 {
     /* seed randomness */
     srand( (unsigned)time(NULL) );

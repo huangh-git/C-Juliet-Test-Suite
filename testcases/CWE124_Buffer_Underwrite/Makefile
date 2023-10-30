@@ -4,7 +4,10 @@ WASI_SDK_PATH?=/Users/hh/git/ms-wasi-sdk/build
 SUFFIX?=.wasm
 
 # 子目录列表
-SUBDIRS := $(wildcard */.)
+ALL_SUBDIRS := $(wildcard */.)
+EXCLUDE = s04/. 
+SUBDIRS = $(filter-out $(EXCLUDE), $(ALL_SUBDIRS))
+
 
 # 默认目标
 all:

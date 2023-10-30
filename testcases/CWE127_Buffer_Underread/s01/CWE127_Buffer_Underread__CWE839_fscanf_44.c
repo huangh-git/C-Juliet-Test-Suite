@@ -125,7 +125,7 @@ void CWE127_Buffer_Underread__CWE839_fscanf_44_good()
    application, which is how source code analysis tools are tested. */
 #ifdef INCLUDEMAIN
 
-int main(int argc, char * argv[])
+int main()
 {
     /* seed randomness */
     srand( (unsigned)time(NULL) );

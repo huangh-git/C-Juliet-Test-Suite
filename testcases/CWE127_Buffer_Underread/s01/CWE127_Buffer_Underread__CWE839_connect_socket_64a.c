@@ -208,7 +208,7 @@ void CWE127_Buffer_Underread__CWE839_connect_socket_64_good()
 
 #ifdef INCLUDEMAIN
 
-int main(int argc, char * argv[])
+int main()
 {
     /* seed randomness */
     srand( (unsigned)time(NULL) );

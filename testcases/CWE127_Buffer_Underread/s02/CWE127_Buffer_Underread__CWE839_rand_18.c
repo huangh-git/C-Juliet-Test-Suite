@@ -27,7 +27,7 @@ void CWE127_Buffer_Underread__CWE839_rand_18_bad()
     goto source;
 source:
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32();
+    data = -1;
     goto sink;
 sink:
     {
@@ -58,7 +58,7 @@ static void goodB2G()
     goto source;
 source:
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32();
+    data = -1;
     goto sink;
 sink:
     {
@@ -118,7 +118,7 @@ void CWE127_Buffer_Underread__CWE839_rand_18_good()
 
 #ifdef INCLUDEMAIN
 
-int main(int argc, char * argv[])
+int main()
 {
     /* seed randomness */
     srand( (unsigned)time(NULL) );

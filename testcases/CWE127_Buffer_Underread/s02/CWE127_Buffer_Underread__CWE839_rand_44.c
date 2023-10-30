@@ -44,7 +44,7 @@ void CWE127_Buffer_Underread__CWE839_rand_44_bad()
     /* Initialize data */
     data = -1;
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32();
+    data = -1;
     /* use the function pointer */
     funcPtr(data);
 }
@@ -107,7 +107,7 @@ static void goodB2G()
     /* Initialize data */
     data = -1;
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32();
+    data = -1;
     funcPtr(data);
 }
 
@@ -125,7 +125,7 @@ void CWE127_Buffer_Underread__CWE839_rand_44_good()
    application, which is how source code analysis tools are tested. */
 #ifdef INCLUDEMAIN
 
-int main(int argc, char * argv[])
+int main()
 {
     /* seed randomness */
     srand( (unsigned)time(NULL) );

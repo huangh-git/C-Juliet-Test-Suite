@@ -142,7 +142,7 @@ void CWE127_Buffer_Underread__malloc_wchar_t_cpy_08_good()
 
 #ifdef INCLUDEMAIN
 
-int main(int argc, char * argv[])
+int main()
 {
     /* seed randomness */
     srand( (unsigned)time(NULL) );

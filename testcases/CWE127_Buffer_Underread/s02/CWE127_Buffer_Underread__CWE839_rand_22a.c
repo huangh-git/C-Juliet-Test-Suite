@@ -30,7 +30,7 @@ void CWE127_Buffer_Underread__CWE839_rand_22_bad()
     /* Initialize data */
     data = -1;
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32();
+    data = -1;
     CWE127_Buffer_Underread__CWE839_rand_22_badGlobal = 1; /* true */
     CWE127_Buffer_Underread__CWE839_rand_22_badSink(data);
 }
@@ -53,7 +53,7 @@ static void goodB2G1()
     /* Initialize data */
     data = -1;
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32();
+    data = -1;
     CWE127_Buffer_Underread__CWE839_rand_22_goodB2G1Global = 0; /* false */
     CWE127_Buffer_Underread__CWE839_rand_22_goodB2G1Sink(data);
 }
@@ -67,7 +67,7 @@ static void goodB2G2()
     /* Initialize data */
     data = -1;
     /* POTENTIAL FLAW: Set data to a random value */
-    data = RAND32();
+    data = -1;
     CWE127_Buffer_Underread__CWE839_rand_22_goodB2G2Global = 1; /* true */
     CWE127_Buffer_Underread__CWE839_rand_22_goodB2G2Sink(data);
 }
@@ -103,7 +103,7 @@ void CWE127_Buffer_Underread__CWE839_rand_22_good()
 
 #ifdef INCLUDEMAIN
 
-int main(int argc, char * argv[])
+int main()
 {
     /* seed randomness */
     srand( (unsigned)time(NULL) );
