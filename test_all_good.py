@@ -10,11 +10,11 @@ test_cases = [
     "CWE127_Buffer_Underread",
 ]
 
-# def run_make_clean(args):
-#     try:
-#         subprocess.run(['make', 'clean', f'SUFFIX={args.suffix}'], check=True)
-#     except subprocess.CalledProcessError as e:
-#         print(f"Error running 'make clean': {e}")
+def run_make_clean(args):
+    try:
+        subprocess.run(['make', 'clean', f'SUFFIX={args.suffix}'], check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Error running 'make clean': {e}")
 
 def run_make_individuals(args):
     try:
@@ -44,8 +44,8 @@ def main():
     for case in test_cases:
         os.chdir(os.path.join("testcases", case))
         #make clean
-        # print("make clean")
-        # run_make_clean(args)
+        print("make clean")
+        run_make_clean(args)
         print("make all")
         run_make_individuals(args)
         print("run all good")

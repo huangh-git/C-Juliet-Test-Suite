@@ -74,7 +74,7 @@ for subdir, _, _ in os.walk('.'):
 current_dir = os.path.dirname(os.path.abspath(__file__))
 with open('../../total_output.txt', 'a') as file:
     file.write(datetime.now().strftime("%Y-%m-%d %H:%M:%S") +  "\n")
-    file.write(os.path.dirname(current_dir) +  ". run " + suffix +"\n")
+    file.write(current_dir +  ". run " + suffix +"\n")
     noPassCnt = 0
     for key, value in dataCnt.items():
         file.write(f"{key}\t{value}\n")
