@@ -1,6 +1,6 @@
 CC_PATH?=/Users/hh/git/llvm-project-memswasm/build
 WASI_LIBC_PATH?=/Users/hh/git/ms-wasi-libc/sysroot
-WASI_SDK_PATH?=/Users/hh/git/ms-wasi-sdk/build
+WASI_SDK_PATH?=/Users/hh/git/ms-wasi-sdk/
 SUFFIX?=.wasm
 
 # 子目录列表

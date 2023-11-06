@@ -3,28 +3,32 @@ import subprocess
 import argparse
 
 test_cases = [
+    "CWE121_Stack_Based_Buffer_Overflow",
+    "CWE122_Heap_Based_Buffer_Overflow",
     "CWE124_Buffer_Underwrite",
+    "CWE126_Buffer_Overread",
+    "CWE127_Buffer_Underread",
 ]
 
-def run_make_clean(args):
-    try:
-        subprocess.run(['make', 'clean', f'SUFFIX={args.suffix}'], check=True)
-    except subpreces.CalledProcessError as e:
-        print(f"Error running 'make clean': {e}")
+# def run_make_clean(args):
+#     try:
+#         subprocess.run(['make', 'clean', f'SUFFIX={args.suffix}'], check=True)
+#     except subprocess.CalledProcessError as e:
+#         print(f"Error running 'make clean': {e}")
 
 def run_make_individuals(args):
     try:
-        subprocess.run(['make', 'individuals', f'CC_PATH={args.cc}', f'WASI_LIBC_PATH={args.wasi_libc}',
+        subprocess.run(['make', 'all', f'CC_PATH={args.cc}', f'WASI_LIBC_PATH={args.wasi_libc}',
                         f'WASI_SDK_PATH={args.wasi_sdk}', f'SUFFIX={args.suffix}', '-j8'], check=True)
     except subprocess.CalledProcessError as e:
-        print(f"Error running 'make individuals': {e}")
+        print(f"Error running 'make all': {e}")
         # sys.exit(1)
 
 def run_individual_script(args):
     try:
-        subprocess.run(['python3', 'run_individual.py', f'{args.wasmtime}', f'{args.suffix}'], check=True)
+        subprocess.run(['python3', 'run_all_good.py', f'{args.wasmtime}', f'{args.suffix}'], check=True)
     except subprocess.CalledProcessError as e:
-        print(f"Error running 'run_individual.py': {e}")
+        print(f"Error running 'run_all_good.py': {e}")
 
 def main():
     parser = argparse.ArgumentParser(description='Script description')
@@ -39,12 +43,12 @@ def main():
 
     for case in test_cases:
         os.chdir(os.path.join("testcases", case))
-        # make clean
+        #make clean
         # print("make clean")
         # run_make_clean(args)
-        # print("make individuals")
-        # run_make_individuals(args)
-        print("run individuals")
+        print("make all")
+        run_make_individuals(args)
+        print("run all good")
         run_individual_script(args)
 
         os.chdir("../..")

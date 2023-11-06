@@ -1,6 +1,7 @@
 import os
 import subprocess
 import sys
+from datetime import datetime
 
 wasmtime_path = '/Users/hh/git/wasmtime/target/debug/wasmtime'
 suffix = '.wasm'
@@ -36,3 +37,10 @@ for subdir, _, _ in os.walk('.'):
     os.chdir('..')
 
 print("failed runs:\n", failed_runs)
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+with open('../../total_good.txt', 'a') as file:
+    file.write(datetime.now().strftime("%Y-%m-%d %H:%M:%S") +  "\n")
+    file.write(current_dir +  ". run " + suffix +"\n")
+    for v in failed_runs:
+        file.write(f"{v}\n")

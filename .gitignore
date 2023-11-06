@@ -5,3 +5,6 @@
 **/*.wat
 **/*.out
 **/*.txt
+.git_back/*
+.vscode/*
+.DS_Store
