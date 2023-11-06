@@ -56,6 +56,9 @@ for subdir, _, _ in os.walk('.'):
                     print("without 'out of bounds'")
                     failed_runs.append(os.path.join(subdir, filename))
                 # break
+            except UnicodeDecodeError:
+                print(f"Unable to decode stderr as UTF-8: {os.path.join(subdir, filename)}")
+                failed_runs.append(os.path.join(subdir, filename))
 
     # Change back to the parent directory
     os.chdir('..')
