@@ -38,16 +38,18 @@ def main():
     parser.add_argument('--cc', default='/home/hh/llvm-project-memswasm/build', help='Path to clang build')
     parser.add_argument('--wasi_libc', default='/home/hh/ms-wasi-libc/sysroot', help='Path to wasi libc.')
     parser.add_argument('--wasi_sdk', default='/home/hh/ms-wasi-sdk', help='Path to wasi sdk.')
+    parser.add_argument('--no_remake', default=False, help='do make clean and make again')
 
     args = parser.parse_args()
 
     for case in test_cases:
         os.chdir(os.path.join("testcases", case))
         #make clean
-        print("make clean")
-        run_make_clean(args)
-        print("make individuals")
-        run_make_individuals(args)
+        if not args.no_remake:
+            print("make clean")
+            run_make_clean(args)
+            print("make individuals")
+            run_make_individuals(args)
         print("run individuals")
         run_individual_script(args)
 
