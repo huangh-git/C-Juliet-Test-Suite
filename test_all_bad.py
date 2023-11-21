@@ -26,7 +26,7 @@ def run_make_individuals(args):
 
 def run_individual_script(args):
     try:
-        subprocess.run(['python3', 'run_individual.py', f'{args.wasmtime}', f'{args.suffix}'], check=True)
+        subprocess.run(['python3', 'run_individual.py', f'{args.wasmtime}', f'{args.suffix}', f'{args.run_option}'], check=True)
     except subprocess.CalledProcessError as e:
         print(f"Error running 'run_individual.py': {e}")
 
@@ -39,6 +39,7 @@ def main():
     parser.add_argument('--wasi_libc', default='/home/hh/ms-wasi-libc/sysroot', help='Path to wasi libc.')
     parser.add_argument('--wasi_sdk', default='/home/hh/ms-wasi-sdk', help='Path to wasi sdk.')
     parser.add_argument('--no_remake', default=False, help='do make clean and make again')
+    parser.add_argument('--run_option', default="", help='wasmtime run option, like --store-check-only')
 
     args = parser.parse_args()
 

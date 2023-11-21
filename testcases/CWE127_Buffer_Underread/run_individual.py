@@ -15,11 +15,13 @@ dataCnt = {
 }
 
 wasmtime_path = '/Users/hh/git/wasmtime/target/debug/wasmtime'
-suffix = '.wasm'
+runOption = ""
 if len(sys.argv) - 1 > 0:
     wasmtime_path = sys.argv[1]
 if len(sys.argv) - 2 > 0:
     suffix = sys.argv[2]
+if len(sys.argv) - 3 > 0:
+    runOption = sys.argv[3]
 
 # Loop through each subdirectory in the current directory
 for subdir, _, _ in os.walk('.'):
@@ -40,7 +42,7 @@ for subdir, _, _ in os.walk('.'):
                 
             # while count > 0:
             try:
-                result = subprocess.run([wasmtime_path, filename, '--allow-unknown-exports'], check=True, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=10)
+                result = subprocess.run([wasmtime_path, filename, '--allow-unknown-exports', runOption], check=True, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=10)
                 print(f"++++Successfully ran: {os.path.join(subdir, filename)}")
                 print(result.stdout)
                 # count -= 1

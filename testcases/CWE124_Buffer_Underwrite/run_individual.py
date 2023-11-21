@@ -16,10 +16,13 @@ dataCnt = {
 
 wasmtime_path = '/Users/hh/git/wasmtime/target/debug/wasmtime'
 suffix = '.wasm'
+runOption = ""
 if len(sys.argv) - 1 > 0:
     wasmtime_path = sys.argv[1]
 if len(sys.argv) - 2 > 0:
     suffix = sys.argv[2]
+if len(sys.argv) - 3 > 0:
+    runOption = sys.argv[3]
 
 # Loop through each subdirectory in the current directory
 for subdir, _, _ in os.walk('.'):
@@ -40,7 +43,7 @@ for subdir, _, _ in os.walk('.'):
                 
             # while count > 0:
             try:
-                result = subprocess.run([wasmtime_path, filename, '--allow-unknown-exports'], check=True, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=10)
+                result = subprocess.run([wasmtime_path, filename, '--allow-unknown-exports', runOption], check=True, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=10)
                 print(f"++++Successfully ran: {os.path.join(subdir, filename)}")
                 print(result.stdout)
                 # count -= 1
@@ -67,9 +70,9 @@ for subdir, _, _ in os.walk('.'):
         f.write("Successful runs:" + "\n\t".join(successful_runs)+"\n\n")
         f.write("Timeout runs:" + "\n\t".join(timeout_runs)+"\n\n")
         f.write("Failed runs without out of bounds trap:" + "\n\t".join(failed_runs)+"\n\n")
-    dataCnt["cnt_successful"] = len(successful_runs)
-    dataCnt["cnt_timeout"] = len(timeout_runs)
-    dataCnt["cnt_failed_abnormal"] = len(failed_runs)
+    dataCnt["cnt_failed_abnormal"] += len(failed_runs)
+    dataCnt["cnt_successful"] += len(successful_runs)
+    dataCnt["cnt_timeout"] += len(timeout_runs)
     successful_runs=[]
     timeout_runs=[]
     failed_runs=[]
