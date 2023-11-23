@@ -99,7 +99,7 @@ void CWE476_NULL_Pointer_Dereference__null_check_after_deref_07_good()
 
 #ifdef INCLUDEMAIN
 
-int main(int argc, char * argv[])
+int main()
 {
     /* seed randomness */
     srand( (unsigned)time(NULL) );
