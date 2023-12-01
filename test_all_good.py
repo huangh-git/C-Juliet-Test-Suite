@@ -8,6 +8,7 @@ test_cases = [
     "CWE124_Buffer_Underwrite",
     "CWE126_Buffer_Overread",
     "CWE127_Buffer_Underread",
+    "CWE476_NULL_Pointer_Dereference",
 ]
 
 def run_make_clean(args):
@@ -29,6 +30,7 @@ def run_all_good_script(args):
         subprocess.run(['python3', 'run_all_good.py', f'{args.wasmtime}', f'{args.suffix}'], check=True)
     except subprocess.CalledProcessError as e:
         print(f"Error running 'run_all_good.py': {e}")
+        sys.exit()
 
 def main():
     parser = argparse.ArgumentParser(description='Script description')

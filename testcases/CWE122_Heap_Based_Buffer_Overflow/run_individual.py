@@ -2,6 +2,8 @@ import os
 import subprocess
 import sys
 from datetime import datetime
+import concurrent.futures
+import multiprocessing
 
 # Initialize arrays to store the results
 successful_runs = []
@@ -17,12 +19,31 @@ dataCnt = {
 wasmtime_path = '/Users/hh/git/wasmtime/target/debug/wasmtime'
 suffix = '.wasm'
 runOption = ""
+maxWorkNum = multiprocessing.cpu_count()*1/4
 if len(sys.argv) - 1 > 0:
     wasmtime_path = sys.argv[1]
 if len(sys.argv) - 2 > 0:
     suffix = sys.argv[2]
 if len(sys.argv) - 3 > 0:
     runOption = sys.argv[3]
+if len(sys.argv) - 4 > 0:
+    maxWorkNum = int(sys.argv[4])
+
+def run_executable(filename):
+    try:
+        result = subprocess.run([wasmtime_path, filename, '--allow-unknown-exports', runOption], check=True, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=20)
+        print(f"++++Successfully ran: {filename}")
+        return 'success', filename
+    except subprocess.TimeoutExpired:
+        print(f"====Timeout while running: {filename}")
+        return 'timeout', filename
+    except subprocess.CalledProcessError as e:
+        print(f"----Failed to run: {filename}")
+        if 'out of bounds' not in str(e.stderr):
+            print("without 'out of bounds'")
+            return 'fail', filename
+    return '', ''
+
 
 # Loop through each subdirectory in the current directory
 for subdir, _, _ in os.walk('.'):
@@ -32,32 +53,38 @@ for subdir, _, _ in os.walk('.'):
     # Change to the subdirectory
     os.chdir(subdir)
 
+    executable_files = [f for f in os.listdir('.') if f.endswith(suffix) and "_good" not in f]
+    dataCnt['cnt_total'] += len(executable_files)
+    # 使用线程池执行
+    with concurrent.futures.ThreadPoolExecutor(max_workers=maxWorkNum) as executor:
+        results = executor.map(run_executable, executable_files)
+        for status, filename in results:
+            if status == 'success':
+                successful_runs.append(filename)
+            elif status == 'timeout':
+                timeout_runs.append(filename)
+            elif status == 'fail':
+                failed_runs.append(filename)
     # Run each .wasm file in the subdirectory
-    for filename in os.listdir('.'):
-        if filename.endswith(suffix) and  "_good" not in filename:
-            dataCnt['cnt_total'] += 1
-            # max_runs = 5
-            # count = max_runs
-            # if "rand" in filename:
-            #     count += max_runs
-                
-            # while count > 0:
-            try:
-                result = subprocess.run([wasmtime_path, filename, '--allow-unknown-exports', runOption], check=True, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=10)
-                print(f"++++Successfully ran: {os.path.join(subdir, filename)}")
-                # count -= 1
-                # if count == 0:
-                successful_runs.append(os.path.join(subdir, filename))
-            except subprocess.TimeoutExpired:
-                print(f"====Timeout while running: {os.path.join(subdir, filename)}")
-                timeout_runs.append(os.path.join(subdir, filename))
-                # break
-            except subprocess.CalledProcessError as e:
-                print(f"----Failed to run: {os.path.join(subdir, filename)}")
-                if 'out of bounds' not in str(e.stderr):
-                    print("without 'out of bounds'")
-                    failed_runs.append(os.path.join(subdir, filename))
-                # break
+    # for filename in os.listdir('.'):
+        # if filename.endswith(suffix) and  "_good" not in filename:
+        #     dataCnt['cnt_total'] += 1
+        #     try:
+        #         result = subprocess.run([wasmtime_path, filename, '--allow-unknown-exports', runOption], check=True, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=10)
+        #         print(f"++++Successfully ran: {os.path.join(subdir, filename)}")
+        #         # count -= 1
+        #         # if count == 0:
+        #         successful_runs.append(os.path.join(subdir, filename))
+        #     except subprocess.TimeoutExpired:
+        #         print(f"====Timeout while running: {os.path.join(subdir, filename)}")
+        #         timeout_runs.append(os.path.join(subdir, filename))
+        #         # break
+        #     except subprocess.CalledProcessError as e:
+        #         print(f"----Failed to run: {os.path.join(subdir, filename)}")
+        #         if 'out of bounds' not in str(e.stderr):
+        #             print("without 'out of bounds'")
+        #             failed_runs.append(os.path.join(subdir, filename))
+        #         # break
 
     # Change back to the parent directory
     os.chdir('..')

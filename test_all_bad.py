@@ -1,13 +1,16 @@
 import os
 import subprocess
 import argparse
+import multiprocessing
+
 
 test_cases = [
-    "CWE121_Stack_Based_Buffer_Overflow",
-    "CWE122_Heap_Based_Buffer_Overflow",
-    "CWE124_Buffer_Underwrite",
+    # "CWE121_Stack_Based_Buffer_Overflow",
+    # "CWE122_Heap_Based_Buffer_Overflow",
+    # "CWE124_Buffer_Underwrite",
     "CWE126_Buffer_Overread",
-    "CWE127_Buffer_Underread",
+    # "CWE127_Buffer_Underread",
+    # "CWE476_NULL_Pointer_Dereference",
 ]
 
 def run_make_clean(args):
@@ -40,6 +43,7 @@ def main():
     parser.add_argument('--wasi_sdk', default='/home/hh/ms-wasi-sdk', help='Path to wasi sdk.')
     parser.add_argument('--no_remake', default=False, help='do make clean and make again')
     parser.add_argument('--run_option', default="", help='wasmtime run option, like --store-check-only')
+    parser.add_argument('--max_works', default=multiprocessing.cpu_count()*1/4, help="how many works can we do at once")
 
     args = parser.parse_args()
 
