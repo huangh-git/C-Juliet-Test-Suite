@@ -9,6 +9,7 @@ import multiprocessing
 successful_runs = []
 timeout_runs = []
 failed_runs = []
+undetected = []
 dataCnt = {
     'cnt_successful': 0,
     'cnt_timeout': 0,
@@ -35,10 +36,10 @@ def run_executable(filename):
         print(f"====Timeout while running: {filename}")
         return 'timeout', filename
     except subprocess.CalledProcessError as e:
-        print(f"----Failed to run: {filename}")
         if 'out of bounds' not in str(e.stderr):
             print("without 'out of bounds'")
             return 'fail', filename
+        print(f"----The out-of-bounds access was successfully detected: {filename}")
     except UnicodeDecodeError:
         return 'fail', filename
     return '', ''
@@ -61,28 +62,6 @@ for subdir, _, _ in os.walk('.'):
                 timeout_runs.append(filename)
             elif status == 'fail':
                 failed_runs.append(filename)
-    # Run each .wasm file in the subdirectory
-    # for filename in os.listdir('.'):
-    #     if filename.endswith(suffix) and "_good" not in filename:
-    #         dataCnt['cnt_total'] += 1 
-    #         try:
-    #             result = subprocess.run([wasmtime_path, filename, '--allow-unknown-exports', runOption], check=True, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=10)
-    #             print(f"++++Successfully ran: {os.path.join(subdir, filename)}")
-    #             # count -= 1
-    #             # if count == 0:
-    #             successful_runs.append(os.path.join(subdir, filename))
-    #         except subprocess.TimeoutExpired:
-    #             print(f"====Timeout while running: {os.path.join(subdir, filename)}")
-    #             timeout_runs.append(os.path.join(subdir, filename))
-    #             # break
-    #         except subprocess.CalledProcessError as e:
-    #             print(f"----Failed to run: {os.path.join(subdir, filename)}")
-    #             if 'out of bounds' not in str(e.stderr):
-    #                 print("without 'out of bounds'")
-    #                 failed_runs.append(os.path.join(subdir, filename))
-
-    # Change back to the parent directory
-    # os.chdir('..')
     with open("output.log", "a") as f:
         f.write(subdir + " " + datetime.now().strftime("%Y-%m-%d %H:%M:%S") +  "\n")
         f.write("Successful runs more than five times:" + "\n\t".join(successful_runs)+"\n\n")
@@ -91,14 +70,15 @@ for subdir, _, _ in os.walk('.'):
     dataCnt["cnt_failed_abnormal"] += len(failed_runs)
     dataCnt["cnt_successful"] += len(successful_runs)
     dataCnt["cnt_timeout"] += len(timeout_runs)
+    undetected = undetected + failed_runs + timeout_runs + successful_runs
     successful_runs=[]
     timeout_runs=[]
     failed_runs=[]
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
-with open('../../total_output.txt', 'a') as file:
+with open('../../total_bad.txt', 'a') as file:
     file.write(datetime.now().strftime("%Y-%m-%d %H:%M:%S") +  "\n")
-    file.write(current_dir +  ". run " + suffix +"\n")
+    file.write("current dir:" + current_dir +  ".\nsuffix: " + suffix +"\n")
     noPassCnt = 0
     for key, value in dataCnt.items():
         file.write(f"{key}\t{value}\n")
@@ -106,5 +86,6 @@ with open('../../total_output.txt', 'a') as file:
             noPassCnt += value
     file.write("can not detection:\t" + str(noPassCnt*1.0/dataCnt["cnt_total"]) + "\n")
     file.write("can detection:\t" + str(1-noPassCnt*1.0/dataCnt["cnt_total"]) + "\n")
-
+    file.write("undetected files:\n" + undetected.__str__() + "\n")
+    file.write("\n")
 

@@ -28,13 +28,17 @@ for subdir, _, _ in os.walk('.'):
         sys.exit()
     
     # 改回到原始目录
-    os.chdir('..')
+    # os.chdir('..')
 
 print("failed runs:\n", failed_runs)
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 with open('../../total_good.txt', 'a') as file:
     file.write(datetime.now().strftime("%Y-%m-%d %H:%M:%S") +  "\n")
-    file.write(current_dir +  ". run " + suffix +"\n")
-    for v in failed_runs:
-        file.write(f"{v}\n")
+    file.write("current dir:" + current_dir +  ".\nsuffix: " + suffix +"\n")
+    file.write(f"failed runs: {len(failed_runs)}\n")
+    if len(failed_runs) > 0:
+        file.write("failed runs:\n")
+        for v in failed_runs:
+            file.write(f"{v}\n")
+    file.write("\n")
